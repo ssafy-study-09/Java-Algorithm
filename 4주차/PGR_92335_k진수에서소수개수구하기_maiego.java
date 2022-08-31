@@ -13,9 +13,8 @@ class Solution {
                 String s = Integer.toString(n,k);
                 
                 int cnt=0;
-                String[] arr = s.split("0");
+                String[] arr = s.split("0+");
                 for (String ss: arr) {
-                        if (ss.isEmpty()) continue;
                         long x = Long.parseLong(ss);
                         if (isPrime(x)) ++cnt;
                 }
