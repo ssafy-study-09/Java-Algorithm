@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Main {
+	
+	static class Item {
+		int x, cnt;
+		Item(int a, int b) {
+			x=a; cnt=b;
+		}
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		StringBuilder sb = new StringBuilder();
+		
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		
+		List<Integer> adj[] = new List[n+1];
+		for (int i=1; i<=n; ++i)
+			adj[i] = new ArrayList<>();
+		
+		int[] indegree = new int[n+1];
+		while (m-->0) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			adj[a].add(b);
+			indegree[b]++;
+		}
+		
+		int[] ans = new int[n+1];
+		Deque<Item> q = new ArrayDeque<>();
+		for (int i=1; i<=n; ++i)
+			if (indegree[i]==0)
+				q.add(new Item(i, 1));
+
+		while (!q.isEmpty()) {
+			Item item = q.pop();
+			ans[item.x]= item.cnt; 
+			for (int v: adj[item.x]) {
+				if (--indegree[v]==0)
+					q.add(new Item(v, item.cnt+1));
+			}
+		}
+		
+		for (int i=1; i<=n; ++i)
+			sb.append(ans[i]).append(' ');
+		
+		System.out.println(sb);
+
+	}
+
+}
