@@ -18,6 +18,10 @@ public class BOJ_14889_스타트와링크_ssu {
 		int[] index = new int[N];
 		int cnt=0;
 		int minDiff = (int)1e9;
+		// 4개 짜리 중에 2개를 선택
+		// 0 0 0 0
+		// 0 0 1 1
+		// 0 1 0 1 -> 1 기록 위치의 숫자를 선택 -> 다음 조합
 		
 		while(++cnt<=N/2) index[N-cnt]=1;
 		do
